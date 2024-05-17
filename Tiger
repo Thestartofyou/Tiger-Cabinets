@@ -1,0 +1,25 @@
+const backendUrl = 'https://your-backend-app.herokuapp.com/api/emails';
+
+document.getElementById('emailForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+
+    try {
+        const response = await fetch(backendUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+            console.log('Email submitted successfully');
+            window.location.href = 'https://tigercabinets.com/our-work/';
+        } else {
+            console.error('Failed to submit email');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
